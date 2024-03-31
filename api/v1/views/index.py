@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """ API """
-
 from flask import jsonify
 from models import storage
 
@@ -26,4 +25,5 @@ def count_class():
     obj_dic = {}
     for key in classes:
         obj_dic[classes[key]] = storage.count(key)
-        return jsonify(obj_dic)
+
+    return jsonify(obj_dic)
