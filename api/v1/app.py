@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """ API """
 
+from api.v1.views import app_views
 from flask import Flask, jsonify
 from models import storage
-from api.v1.views import app_views
 from os import getenv
 from flask import make_response
 from flask import abort
