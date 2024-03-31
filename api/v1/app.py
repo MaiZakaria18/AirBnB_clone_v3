@@ -9,8 +9,6 @@ from flask import make_response
 from flask import abort
 
 
-
-
 app = Flask(__name__)
 app.register_blueprint(app_views)
 
