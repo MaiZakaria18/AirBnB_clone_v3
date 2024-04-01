@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-from flask import Flask, jsonify, abort, request
+from flask import jsonify, abort, request
 from api.v1.views import app_views
 from models import storage
 from models.state import State
 
 
-@app_views.route('/states', methods=['GET'])
+@app_views.route('/states', methods=['GET'], strict_slashes=False)
 def list_of_states():
     state_objects = storage.all(State).values()
     state_list = [state.to_dict() for state in state_objects]
