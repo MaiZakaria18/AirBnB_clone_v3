@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-
+"""
+Handles all RESTful API actions for `State` objects
+"""
 from flask import abort, jsonify, request
 from models.city import City
 from api.v1.views import app_views
