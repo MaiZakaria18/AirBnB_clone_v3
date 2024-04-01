@@ -6,7 +6,6 @@ from flask import Flask, jsonify
 from models import storage
 from os import getenv
 from flask import make_response
-from flask import abort
 
 
 app = Flask(__name__)

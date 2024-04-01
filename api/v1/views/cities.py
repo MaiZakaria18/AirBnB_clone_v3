@@ -1,4 +1,4 @@
-# api/v1/views/cities.py
+#!/usr/bin/python3
 
 from flask import abort, jsonify, request
 from models.city import City
