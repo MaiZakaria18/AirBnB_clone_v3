@@ -52,9 +52,9 @@ def create_users():
 
 
 @app_views.route('/users/<user_id>', methods=['PUT'])
-def update_users(users_id):
+def update_users(user_id):
     """Update `users` object"""
-    users = storage.get(User, users_id)
+    users = storage.get(User, user_id)
     if users is None:
         abort(404)
     if not request.is_json:
