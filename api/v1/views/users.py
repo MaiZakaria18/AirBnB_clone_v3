@@ -52,13 +52,13 @@ def create_users():
 @app_views.route('/users/<user_id>', methods=['PUT'])
 def update_users(users_id):
     """Update `users` object"""
-    state = storage.get(User, users_id)
+    users = storage.get(User, users_id)
     if users is None:
         abort(404)
     if not request.is_json:
         abort(400, "Not a JSON")
     data = request.json
     for key, value in data.items():
-        setattr(state, key, value)
+        setattr(users, key, value)
     storage.save()
-    return jsonify(state.to_dict()), 200
+    return jsonify(users.to_dict()), 200
