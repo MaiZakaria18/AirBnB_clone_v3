@@ -65,10 +65,9 @@ def post_city(state_id):
         abort(400, description="Missing name")
 
     data = request.get_json()
-    data['state_id'] = state_id
     instance = City(**data)
+    instance.state_id = state.id
     instance.save()
-    storage.new(instance)
     return make_response(jsonify(instance.to_dict()), 201)
 
 
@@ -90,5 +89,5 @@ def put_city(city_id):
     for key, value in data.items():
         if key not in ignore:
             setattr(city, key, value)
-    City.save()
+    storage.save()
     return make_response(jsonify(city.to_dict()), 200)
