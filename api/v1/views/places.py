@@ -9,6 +9,7 @@ from models.place import Place
 from models.city import City
 from models.user import User
 
+
 @app_views.route('/cities/<city_id>/places', methods=['GET'],
                  strict_slashes=False)
 def list_of_places(city_id):
@@ -67,6 +68,7 @@ def place_post(city_id):
     place.save()
     place = place.to_json()
     return jsonify(place), 201
+
 
 @app_views.route('/places/<place_id>', methods=['PUT'])
 def update_place(place_id):
