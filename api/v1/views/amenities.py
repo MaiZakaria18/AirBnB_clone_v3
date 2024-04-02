@@ -40,7 +40,7 @@ def amenity_delete(amenity_id):
 def create_amenities():
     """Create a `amenities` object"""
     if not request.is_json:
-        abort(400, 'Request must be JSON')
+        abort(400, 'Not a JSON')
     if 'name' not in request.json:
         abort(400, 'Missing name')
     new_amenities = Amenity(**request.json)
