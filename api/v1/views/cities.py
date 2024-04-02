@@ -65,9 +65,10 @@ def post_city(state_id):
         abort(400, description="Missing name")
 
     data = request.get_json()
+    data['state_id'] = state_id
     instance = City(**data)
-    instance.state_id = state.id
     instance.save()
+    storage.new(instance)
     return make_response(jsonify(instance.to_dict()), 201)
 
 
