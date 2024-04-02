@@ -7,7 +7,7 @@ from api.v1.views import app_views
 from models import storage
 from models.place import Place
 from models.city import City
-
+from models.user import User
 
 @app_views.route('/cities/<city_id>/places', methods=['GET'],
                  strict_slashes=False)
@@ -55,11 +55,19 @@ def create_places(city_id):
         abort(400, 'Not a JSON')
     if 'user_id' not in request.json:
         abort(400, 'Missing user_id')
-    if 'user_id' is None:
+
+    user_id = request.json['user_id']
+    user = storage.get(User, user_id)
+    if user is None:
         abort(404)
+
     if 'name' not in request.json:
         abort(400, 'Missing name')
-    new_place = Place(**request.json)
+
+    new_place_data = request.json
+    new_place_data['city_id'] = city_id
+    new_place = Place(**new_place_data)
+
     storage.new(new_place)
     storage.save()
     return jsonify(new_place.to_dict()), 201
