@@ -89,5 +89,5 @@ def put_city(city_id):
     for key, value in data.items():
         if key not in ignore:
             setattr(city, key, value)
-    City.save()
+    storage.save()
     return make_response(jsonify(city.to_dict()), 200)
