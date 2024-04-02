@@ -46,28 +46,33 @@ def place_delete(place_id):
     return jsonify({}), 200
 
 
-@app_views.route('/cities/<city_id>/places', methods=['POST'],
-                 strict_slashes=False)
+@app_views.route('/cities/<city_id>/places', methods=['POST'], strict_slashes=False)
 def place_post(city_id):
     """ handles POST method """
     city = storage.get(City, city_id)
     if city is None:
         abort(404)
+
     data = request.get_json()
     if data is None:
         abort(400, "Not a JSON")
-    if 'user_id' not in data.keys():
+
+    if 'user_id' not in data:
         abort(400, "Missing user_id")
+
     user = storage.get(User, data['user_id'])
     if user is None:
         abort(404)
-    if 'name' not in data.keys():
+
+    if 'name' not in data:
         abort(400, "Missing name")
+
     place = Place(**data)
     place.city_id = city_id
-    place.save()
-    place = place.to_json()
-    return jsonify(place), 201
+    storage.new(place)
+    storage.save()
+    return jsonify(place.to_json()), 201
+
 
 
 @app_views.route('/places/<place_id>', methods=['PUT'])
