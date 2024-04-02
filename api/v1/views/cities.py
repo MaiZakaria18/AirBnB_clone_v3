@@ -56,19 +56,18 @@ def post_city(state_id):
     """
     Creating a City
     """
+    data = request.get_json()
     state = storage.get(State, state_id)
     if not state:
         abort(404)
-    if not request.get_json():
-        abort(400, description="Not a JSON")
-    if 'name' not in request.get_json():
-        abort(400, description="Missing name")
+    if not data:
+        abort(400, "Not a JSON")
+    if "name" not in data:
+        abort(400, "Missing name")
+    city = City(state_id=state_id, **data)
+    city.save()
 
-    data = request.get_json()
-    instance = City(**data)
-    instance.state_id = state.id
-    instance.save()
-    return jsonify(instance.to_dict()), 201
+    return jsonify(city.to_dict()), 201
 
 
 @app_views.route('/cities/<city_id>', methods=['PUT'],
