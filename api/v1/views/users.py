@@ -39,13 +39,13 @@ def users_delete(users_id):
 @app_views.route('/users/', methods=['POST'])
 def create_users():
     """Create a `users` object"""
-    if not request.is_json:
+    if not request.get_json:
         abort(400, 'Not a JSON')
-    if 'email' not in request.json:
+    if 'email' not in request.get_json:
         abort(400, 'Missing email')
-    if 'password' not in request.json:
+    if 'password' not in request.get_json:
         abort(400, 'Missing password')
-    new_users = User(**request.json)
+    new_users = User(**request.get_json)
     storage.new(new_users)
     storage.save()
     return jsonify(new_users.to_dict()), 201
