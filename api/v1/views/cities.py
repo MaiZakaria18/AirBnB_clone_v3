@@ -52,7 +52,7 @@ def delete_city(city_id):
 
 @app_views.route("/states/<state_id>/cities", methods=["POST"],
                  strict_slashes=False)
-def city_create(state_id):
+def post_city(state_id):
     """
     create city route
     param: state_id - state id
