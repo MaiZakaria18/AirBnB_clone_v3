@@ -6,11 +6,11 @@ Contains the TestPlaceDocs classes
 from datetime import datetime
 import inspect
 import models
-from models import place
+from models import places
 from models.base_model import BaseModel
 import pep8
 import unittest
-Place = place.Place
+Place = places.Place
 
 
 class TestPlaceDocs(unittest.TestCase):
@@ -36,9 +36,9 @@ class TestPlaceDocs(unittest.TestCase):
 
     def test_place_module_docstring(self):
         """Test for the place.py module docstring"""
-        self.assertIsNot(place.__doc__, None,
+        self.assertIsNot(places.__doc__, None,
                          "place.py needs a docstring")
-        self.assertTrue(len(place.__doc__) >= 1,
+        self.assertTrue(len(places.__doc__) >= 1,
                         "place.py needs a docstring")
 
     def test_place_class_docstring(self):
@@ -59,6 +59,7 @@ class TestPlaceDocs(unittest.TestCase):
 
 class TestPlace(unittest.TestCase):
     """Test the Place class"""
+
     def test_is_subclass(self):
         """Test that Place is a subclass of BaseModel"""
         place = Place()
